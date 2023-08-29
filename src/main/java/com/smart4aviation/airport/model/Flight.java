@@ -10,19 +10,24 @@ import java.time.LocalDateTime;
 public class Flight {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "flight_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "flight_generator")
+    @SequenceGenerator(name = "flight_generator", sequenceName = "flight_generator", allocationSize = 1)
     private Long flightId;
 
-    @Column(name = "flightNumber")
+    @Column(name = "flight_number")
     private Integer flightNumber;
 
-    @Column(name = "departureAirportIATACode")
+    @Column(name = "departure_airport_iata_code")
     private String departureAirportIATACode;
 
-    @Column(name = "arrivalAirportIATACode")
+    @Column(name = "arrival_airport_iata_code")
     private String arrivalAirportIATACode;
 
-    @Column(name = "departureDate")
+    @Column(name = "departure_date")
     private LocalDateTime departureDate;
+
+    @OneToOne(mappedBy = "flight")
+    private Cargo cargo;
 
 }
