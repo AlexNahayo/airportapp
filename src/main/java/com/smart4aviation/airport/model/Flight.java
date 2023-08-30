@@ -2,10 +2,13 @@ package com.smart4aviation.airport.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "flight")
 @Data
 public class Flight {
 
@@ -27,7 +30,10 @@ public class Flight {
     @Column(name = "departure_date")
     private LocalDateTime departureDate;
 
-    @OneToOne(mappedBy = "flight")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "cargo_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Cargo cargo;
 
 }

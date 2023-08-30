@@ -6,9 +6,11 @@ import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "cargo")
 @Data
 public class Cargo {
 
@@ -18,25 +20,13 @@ public class Cargo {
     @SequenceGenerator(name = "cargo_generator", sequenceName = "cargo_generator", allocationSize = 1)
     private Long cargoId;
 
-//    @OneToMany(mappedBy = "cargo", fetch = FetchType.LAZY)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private List<Baggage> baggage;
-//
-//    @OneToMany(mappedBy = "cargo", fetch = FetchType.LAZY)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    @JsonIgnore
-//    private List<CargoItem> cargoItems;
+    @OneToMany(mappedBy = "cargo", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Baggage> baggage = new ArrayList<>();
 
-    @OneToMany (fetch = FetchType.LAZY)
-    @JoinColumn(name = "baggage_id")
-    @JsonIgnore
-    private List<Baggage> baggage;
-
-    @OneToMany (fetch = FetchType.LAZY)
-    @JoinColumn(name = "cargo_item_id")
-    @JsonIgnore
-    private List<CargoItem> cargoItems;
+    @OneToMany(mappedBy = "cargo", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<CargoItem> cargoItems = new ArrayList<>();
 
 }
 

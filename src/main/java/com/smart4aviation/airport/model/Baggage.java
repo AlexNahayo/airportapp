@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
+@Table(name = "baggage")
 @Data
 public class Baggage {
 
@@ -22,8 +23,6 @@ public class Baggage {
     @Column(name = "baggage_pieces")
     private Integer pieces;
 
-    @ManyToOne
-    @JoinColumn(name = "cargo_id")
-    private Cargo cargo;
+
 }
 

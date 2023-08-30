@@ -1,9 +1,12 @@
 package com.smart4aviation.airport.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 
 @Entity
+@Table(name = "cargo_item")
+@Data
 public class CargoItem {
 
     @Id
@@ -20,9 +23,5 @@ public class CargoItem {
 
     @Column(name = "cargo_item_baggage_pieces")
     private Integer pieces;
-
-    @ManyToOne
-    @JoinColumn(name = "cargo_id")
-    private Cargo cargo;
 
 }
