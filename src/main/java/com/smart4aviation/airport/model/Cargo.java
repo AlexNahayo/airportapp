@@ -27,6 +27,7 @@ public class Cargo {
     @OneToMany(mappedBy = "cargo", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<CargoItem> cargoItems = new ArrayList<>();
+
 }
 
 
