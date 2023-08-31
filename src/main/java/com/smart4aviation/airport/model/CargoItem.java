@@ -24,4 +24,8 @@ public class CargoItem {
     @Column(name = "cargo_item_baggage_pieces")
     private Integer pieces;
 
+    @ManyToOne
+    @JoinColumn(name = "cargo_id")
+    private Cargo cargo;
+
 }

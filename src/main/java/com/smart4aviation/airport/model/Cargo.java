@@ -1,5 +1,6 @@
 package com.smart4aviation.airport.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
@@ -26,6 +27,7 @@ public class Cargo {
     @OneToMany(mappedBy = "cargo", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<CargoItem> cargoItems = new ArrayList<>();
-
 }
+
+
 
