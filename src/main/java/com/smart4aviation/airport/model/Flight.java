@@ -36,4 +36,8 @@ public class Flight {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Cargo cargo;
 
+    @ManyToOne
+    @JoinColumn(name = "airport_id")
+    private Airport airport;
+
 }
