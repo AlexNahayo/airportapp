@@ -25,11 +25,11 @@ public class Airport {
     @Column(name = "airport_name")
     private String name;
 
-    @OneToMany(mappedBy = "airport" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "departureAirport", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Flight> departingFlights = new ArrayList<>();
 
-    @OneToMany(mappedBy = "airport" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "arrivalAirport", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Flight> arrivingFlights = new ArrayList<>();
 

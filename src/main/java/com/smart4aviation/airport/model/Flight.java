@@ -40,7 +40,10 @@ public class Flight {
     private Cargo cargo;
 
     @ManyToOne
-    @JoinColumn(name = "airport_id")
-    private Airport airport;
+    @JoinColumn(name = "arrival_airport_id")
+    private Airport arrivalAirport;
 
+    @ManyToOne
+    @JoinColumn(name = "departure_airport_id")
+    private Airport departureAirport;
 }
