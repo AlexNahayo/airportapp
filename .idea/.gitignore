@@ -7,12 +7,17 @@
 /dataSources/
 /dataSources.local.xml
 
-cat ~/.gitignore
+### IntelliJ IDEA ###
+HELP.md
 target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+.idea
 *.class
 *.jar
 *.war
 *.ear
 *.logs
 *.iml
-.idea/
