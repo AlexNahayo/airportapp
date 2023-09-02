@@ -28,6 +28,10 @@ public class SampleModelClassesTest {
         airport.setName("John F. Kennedy International Airport");
         entityManager.persist(airport);
 
+        Airport airport2 = new Airport();
+        airport2.setIATAAirportCode("DUB");
+        airport2.setName("Dublin Airport");
+
         Cargo cargo = new Cargo();
         entityManager.persist(cargo);
 
@@ -52,7 +56,8 @@ public class SampleModelClassesTest {
         flight.setDepartureDate(LocalDateTime.now());
         flight.setArrivalDate(LocalDateTime.now().plusHours(5));
         flight.setCargo(cargo);
-        flight.setAirport(airport);
+        flight.setDepartureAirport(airport);
+        flight.setArrivalAirport(airport2);
         entityManager.persist(flight);
 
         Airport foundAirport = entityManager.find(Airport.class, airport.getAirportId());
@@ -79,7 +84,7 @@ public class SampleModelClassesTest {
         assertNotNull(foundAirport);
         assertEquals("DUB", foundFlight.getArrivalAirportIATACode());
         assertEquals(1236, foundFlight.getFlightNumber());
-        assertEquals(foundFlight.getAirport().getAirportId(), foundAirport.getAirportId());
+        assertEquals(foundFlight.getDepartureAirport().getAirportId(), foundAirport.getAirportId());
         assertEquals(foundFlight.getCargo().getCargoId(), foundCargo.getCargoId());
 
     }
