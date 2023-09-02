@@ -30,6 +30,9 @@ public class Flight {
     @Column(name = "departure_date")
     private LocalDateTime departureDate;
 
+    @Column(name = "arrival_date")
+    private LocalDateTime arrivalDate;
+
     @OneToOne
     @MapsId
     @JoinColumn(name = "cargo_id")
