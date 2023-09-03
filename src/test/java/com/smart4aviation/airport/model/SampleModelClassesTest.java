@@ -24,12 +24,12 @@ public class SampleModelClassesTest {
     public void generateSampleData() {
 
         Airport airport = new Airport();
-        airport.setIATAAirportCode("JFK");
+        airport.setIataAirportCode("JFK");
         airport.setName("John F. Kennedy International Airport");
         entityManager.persist(airport);
 
         Airport airport2 = new Airport();
-        airport2.setIATAAirportCode("DUB");
+        airport2.setIataAirportCode("DUB");
         airport2.setName("Dublin Airport");
 
         Cargo cargo = new Cargo();
@@ -62,7 +62,7 @@ public class SampleModelClassesTest {
 
         Airport foundAirport = entityManager.find(Airport.class, airport.getAirportId());
         assertNotNull(foundAirport);
-        assertEquals("JFK", foundAirport.getIATAAirportCode());
+        assertEquals("JFK", foundAirport.getIataAirportCode());
 
         Cargo foundCargo = entityManager.find(Cargo.class, cargo.getCargoId());
         assertNotNull(foundCargo);
