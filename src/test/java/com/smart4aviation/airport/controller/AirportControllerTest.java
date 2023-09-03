@@ -32,7 +32,7 @@ public class AirportControllerTest {
     private AirportService airportService;
 
     @Test
-    public void testGetAirportInfo() throws Exception {
+    public void getAirportInfo_return_valid_data() throws Exception {
         String airportCode = "ABC";
         LocalDateTime dateTime = LocalDateTime.of(2025, 5, 13, 18, 30);
         Airport airport = new Airport();

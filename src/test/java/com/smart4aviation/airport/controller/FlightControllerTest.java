@@ -31,7 +31,7 @@ public class FlightControllerTest {
     private FlightService flightService;
 
     @Test
-    public void testGetFlightInfo() throws Exception {
+    public void getFlightInfo_return_valid_data() throws Exception {
         int flightNumber = 123;
         LocalDateTime dateTime = LocalDateTime.now();
 
