@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,18 +34,21 @@ public class FlightRepositoryTest {
 
     private Flight flight;
 
+    private Cargo cargo;
+
     @BeforeEach
     void setUp(){
         airport.setName("Airport1");
-        airport.setIATAAirportCode("ABC");
+        airport.setIataAirportCode("ABC");
         airportRepository.save(airport);
 
-        Cargo cargo = new Cargo();
+        cargo = new Cargo();
 
         flight = new Flight();
         flight.setFlightNumber(123);
         flight.setDepartureAirport(airport);
         flight.setCargo(cargo);
+        flight.setDepartureDate(LocalDateTime.of(2025, 5, 13, 15, 30));
         flightRepository.save(flight);
 
     }
@@ -62,6 +66,29 @@ public class FlightRepositoryTest {
     public void deleteById_will_delete_flight() {
         flightRepository.deleteById(flight.getFlightId());
         assertEquals(Optional.empty(), flightRepository.findById(flight.getFlightId()));
+    }
+
+
+    @DisplayName("JUnit retrieving cargo from flight id")
+    @Test
+    public void findCargoByFlightId_will_return_cargo(){
+        Cargo cargoAssociatedWithFlight = flightRepository.findCargoByFlightId(flight.getCargo().getCargoId());
+        assertEquals(cargo, cargoAssociatedWithFlight);
+    }
+
+    @DisplayName("JUnit retrieving cargo from flight number")
+    @Test
+    public void findCargoByFlightNumber_will_return_cargo(){
+        Cargo cargoAssociatedWithFlight = flightRepository.findCargoByFlightNumber(123);
+        assertEquals(cargo, cargoAssociatedWithFlight);
+    }
+
+    @DisplayName("JUnit retrieving cargo from flight number and Date")
+    @Test
+    public void findCargoByFlightNumberAndDate_will_return_cargo(){
+        LocalDateTime  flightDepartureDateAndTime = LocalDateTime.of(2025, 5, 13, 15, 30);
+        Cargo cargoAssociatedWithFlight = flightRepository.findCargoByFlightNumberAndDate(123, flightDepartureDateAndTime);
+        assertEquals(cargo, cargoAssociatedWithFlight);
     }
 
 }

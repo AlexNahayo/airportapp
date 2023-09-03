@@ -38,7 +38,7 @@ public class AirportRepositoryTest {
     void setUp(){
         airport = new Airport();
         airport.setName("Airport1");
-        airport.setIATAAirportCode("ABC");
+        airport.setIataAirportCode("ABC");
         airportRepository.save(airport);
 
         Cargo cargo = new Cargo();
@@ -56,13 +56,13 @@ public class AirportRepositoryTest {
     public void save_should_add_airport(){
         Airport airport2 = new Airport();
         airport2.setName("Airport2");
-        airport2.setIATAAirportCode("ABCDE");
+        airport2.setIataAirportCode("ABCDE");
         airportRepository.save(airport2);
 
         Airport foundAirport = airportRepository.findById(airport2.getAirportId()).orElse(null);
         assertNotNull(foundAirport);
         assertEquals("Airport2", foundAirport.getName());
-        assertEquals("ABCDE", foundAirport.getIATAAirportCode());
+        assertEquals("ABCDE", foundAirport.getIataAirportCode());
     }
 
 
@@ -70,19 +70,19 @@ public class AirportRepositoryTest {
     @Test
     public void findById_return_departing_flights_list() {
         Cargo cargo2 = new Cargo();
+        Cargo cargo3 = new Cargo();
 
         Flight flight2 = new Flight();
         flight2.setFlightNumber(123);
         flight2.setDepartureAirport(airport);
         flight2.setCargo(cargo2);
-        flightRepository.save(flight2);
-
-        Cargo cargo3 = new Cargo();
 
         Flight flight3 = new Flight();
         flight3.setFlightNumber(1234);
         flight3.setDepartureAirport(airport);
         flight3.setCargo(cargo3);
+
+        flightRepository.save(flight2);
         flightRepository.save(flight3);
 
         List<Flight> departingFlights = new ArrayList<>();
@@ -101,19 +101,19 @@ public class AirportRepositoryTest {
     @Test
     public void findById_return_arriving_flights_list() {
         Cargo cargo2 = new Cargo();
+        Cargo cargo3 = new Cargo();
 
         Flight flight2 = new Flight();
         flight2.setFlightNumber(123);
         flight2.setArrivalAirport(airport);
         flight2.setCargo(cargo2);
-        flightRepository.save(flight2);
-
-        Cargo cargo3 = new Cargo();
 
         Flight flight3 = new Flight();
         flight3.setFlightNumber(1234);
         flight3.setArrivalAirport(airport);
         flight3.setCargo(cargo3);
+
+        flightRepository.save(flight2);
         flightRepository.save(flight3);
 
         List<Flight> arrivingFlights = new ArrayList<>();
@@ -128,13 +128,37 @@ public class AirportRepositoryTest {
         assertEquals(2, foundArrivingFlights.size());
     }
 
+    @DisplayName("JUnit returning airport given airport iata code")
+    @Test
+    public void findAirportByIataAirportCode_return_airport() {
+        Cargo cargo2 = new Cargo();
+        Cargo cargo3 = new Cargo();
+
+        Flight flight2 = new Flight();
+        flight2.setFlightNumber(123);
+        flight2.setArrivalAirport(airport);
+        flight2.setCargo(cargo2);
+
+        Flight flight3 = new Flight();
+        flight3.setFlightNumber(1234);
+        flight3.setArrivalAirport(airport);
+        flight3.setCargo(cargo3);
+
+        flightRepository.save(flight2);
+        flightRepository.save(flight3);
+        airportRepository.save(airport);
+        Airport foundAirport = airportRepository.findAirportByIataAirportCode("ABC");
+
+        assertNotNull(foundAirport);
+        assertEquals("ABC", foundAirport.getIataAirportCode());
+    }
 
     @DisplayName("JUnit deleting airport by id")
     @Test
     public void deleteById_remove_airport() {
         Airport airport3 = new Airport();
         airport3.setName("Airport3");
-        airport3.setIATAAirportCode("ABC-DEF");
+        airport3.setIataAirportCode("ABC-DEF");
         airportRepository.save(airport3);
 
         airportRepository.deleteById(airport3.getAirportId());
