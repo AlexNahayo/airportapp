@@ -86,7 +86,6 @@ public class SampleModelClassesTest {
         assertEquals(1236, foundFlight.getFlightNumber());
         assertEquals(foundFlight.getDepartureAirport().getAirportId(), foundAirport.getAirportId());
         assertEquals(foundFlight.getCargo().getCargoId(), foundCargo.getCargoId());
-
     }
 }
 
