@@ -20,7 +20,7 @@ public class Airport {
     private Long airportId;
 
     @Column(name = "iata_airport_code")
-    private String IATAAirportCode;
+    private String iataAirportCode;
 
     @Column(name = "airport_name")
     private String name;
